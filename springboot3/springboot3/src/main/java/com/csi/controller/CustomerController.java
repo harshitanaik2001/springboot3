@@ -42,6 +42,11 @@ public class CustomerController {
         return ResponseEntity.ok(customerServiceImpl.findAll());
     }
 
+    @GetMapping("/sortbyname")
+    public ResponseEntity<List<Customer>> sortByName() {
+        return ResponseEntity.ok(customerServiceImpl.findAll().stream().sorted(Comparator.comparing(Customer::getCustName)).toList());
+    }
+
     @GetMapping("/sortbyid")
     public ResponseEntity<List<Customer>> sortById() {
         return ResponseEntity.ok(customerServiceImpl.findAll().stream().sorted(Comparator.comparingInt(Customer::getCustId)).toList());
